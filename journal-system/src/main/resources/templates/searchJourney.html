@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+  <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/7078/7078214.png">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  <meta charset="UTF-8">
+  <title>Search Journey</title>
+</head>
+
+<style>
+  .navbar-brand {
+      font-weight: bold;
+      color: white !important;
+  }
+
+  .nav-link {
+      color: white !important;
+      text-decoration: none;
+      font-weight: 500;
+      margin-left: 2rem;
+  }
+  label{
+      font-size: 15px;
+      color: black;
+      font-weight: 600;
+  }
+  th{
+      text-transform: capitalize !important;
+      color: white;
+  }
+</style>
+
+<body>
+<nav class="navbar navbar-expand-sm navbar-light bg-primary p-3">
+  <div class="container">
+    <a class="navbar-brand" href="#"><i class="fa fa-book" aria-hidden="true"></i> Journey System</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId"
+            aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+      <ul class="navbar-nav m-auto mt-2 mt-lg-2 ">
+        <li class="nav-item">
+          <a class="nav-link active" href="/"><i class="fa fa-home" aria-hidden="true"></i> Home
+            <span class="visually-hidden">(current)</span></a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/addJourney"><i class="fa fa-plus" aria-hidden="true"></i> Add Journey</a>
+        </li>
+
+
+        <li class="nav-item">
+          <a class="nav-link" href="/searchJourney"><i class="fa fa-search" aria-hidden="true"></i> Search
+            Journey</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/deleteJourney"><i class="fa fa-trash" aria-hidden="true"></i> Delete
+            Journey</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/updateJourney"><i class="fa fa-upload" aria-hidden="true"></i> Update
+            Journey</a>
+        </li>
+
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="container mt-5">
+    <div class="search_data mt-5">
+      <h5 class="text text-success mt-4 mb-2">Search Journey</h5>
+      <form th:action="@{/searchJourney}" method="post" class="form-control mt-5 mb-4 mb-3">
+        <div class="row p-3">
+          <label for="id" class="p-2">Journey Id</label>
+          <input type="text" id="id" name="id" class="form-control" required placeholder="Enter Journey Id">
+        </div>
+        <button type="submit" class="btn btn-success mt-2 mb-3">Search Journey</button>
+      </form>
+    </div>
+    <div th:if="${journey!= null}" class="table-responsive">
+      <table id="journeyTable" class="table table-bordered">
+        <thead class="bg-primary">
+
+        <th>Journey id</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Source</th>
+        <th>Destination</th>
+        </thead>
+        <tbody>
+        <tr>
+          <td th:text="${journey.id}"></td>
+          <td th:text="${journey.username}"></td>
+          <td th:text="${journey.email}"></td>
+          <td th:text="${journey.source}"></td>
+          <td th:text="${journey.destination}"></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="alert alert-danger mt-3 alert-dismissible fade show" role="alert" th:if="${error}">
+      <span th:text="${error}"></span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </div>
+</main>
+</body>
+</html>
